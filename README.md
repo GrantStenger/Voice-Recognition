@@ -3,7 +3,7 @@
 - **Date**: May 6, 2018
 
 ## Installation and Set-Up
-1. Click the green button on the top right that says "Download".
+1. Click the green button on the top right that says "Download ZIP".
 2. Move the zip file to where you want to access the file on your computer (ex. in "Documents").
 3. Unzip file by double taping it.
 4. In terminal navigate to the folder.
@@ -17,7 +17,9 @@
 2. Enjoy!
 
 You also might need to run:
-"sudo pip3 install --upgrade speechrecognition"
-"pip3 install pyobjc-core"
-"pip3 install pyobjc"
+pip install --upgrade pip
+brew install python3
+pip3 install --upgrade speechrecognition
+pip3 install pyobjc-core
+pip3 install pyobjc
 
