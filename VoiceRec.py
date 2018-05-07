@@ -10,11 +10,11 @@ from weather import Weather, Unit
 
 
 def talkToMe(audio):
-    "speaks audio passed as argument"
+	"speaks audio passed as argument"
 
-    print(audio)
-    for line in audio.splitlines():
-        os.system("say " + audio)
+	print(audio)
+	for line in audio.splitlines():
+		os.system("say " + audio)
 
    # tts = gTTS(text=audio, lang='en')
    # tts.save('audio.mp3')
@@ -22,129 +22,144 @@ def talkToMe(audio):
    # os.system(mpg123 audio.mp3)
 
 def myCommand():
-    "listens for commands"
+	"listens for commands"
 
-    r = sr.Recognizer()
+	r = sr.Recognizer()
 
-    with sr.Microphone() as source:
-        print('I am ready for your next command')
-        r.pause_threshold = 1
-        r.adjust_for_ambient_noise(source, duration = 1)
-        audio = r.listen(source)
+	with sr.Microphone() as source:
+		print('I am ready for your next command')
+		r.pause_threshold = 1
+		r.adjust_for_ambient_noise(source, duration = 1)
+		audio = r.listen(source)
 
-    try:
-        command = r.recognize_google(audio)
-        print('You said: ' + command + '/n')
+	try:
+		command = r.recognize_google(audio)
+		print('You said: ' + command + '\n')
 
-    #loop back to continue to listen for commands
+	#loop back to continue to listen for commands
 
-    except sr.UnknownValueError:
-        print('Your last command couldn\'t be heard')
-        command = myCommand()
+	except sr.UnknownValueError:
+		print('Your last command couldn\'t be heard')
+		command = myCommand()
 
-        # assistant(myCommand())
+		# assistant(myCommand())
 
-    return command
+	return command
 
 #if statements for executing commands
 def assistant(command):
-    "if statements for executing commands"
 
-    # chat
-    if 'what\'s up' in command:
-        talkToMe('Nothing much How are you')
+	"""if statements for executing commands"""
 
-    #opens application
-    if 'open google' in command:
-        reg_ex = re.search('open google (.*)', command)
-        url = 'https://www.google.com/'
-        webbrowser.get(chrome_path).open(url)
-        print('Done!')
+	# chat
+	if 'what\'s up' in command:
+		talkToMe('Nothing much, how are you?')
+		return False
 
-    #searches weather by city name
-    if 'what is the weather' in command:
-        weather = Weather(unit=Unit.FAHRENHEIT)
+	#opens application
+	if 'open Google' in command:
+		reg_ex = re.search('open google (.*)', command)
+		url = 'https://www.google.com/'
+		webbrowser.get(reg_ex).open(url)
+		print('Done!')
+		return False
 
-        talkToMe('What city do you want to know about')
-        c_answ = myCommand()
+	#searches weather by city name
+	if 'what is the weather' in command:
+		weather = Weather(unit=Unit.FAHRENHEIT)
 
-        city = c_answ #input("City Name: ")
+		talkToMe('What city do you want to know about')
+		c_answ = myCommand()
 
-        # looks up using name
-        location = weather.lookup_by_location(city)
-        forecasts = location.forecast
+		city = c_answ #input("City Name: ")
 
-        for forecast in forecasts:
-            talkToMe(forecast.date)
-            talkToMe(forecast.text)
-            talkToMe("High: " + forecast.high)
-            talkToMe("Low: " + forecast.low)
+		# looks up using name
+		location = weather.lookup_by_location(city)
+		forecasts = location.forecast
 
-    #sends email to Grace
-    if 'email' in command:
-        talkToMe('Who is the recipient')
-        recipient = myCommand()
+		for forecast in forecasts:
+			talkToMe(forecast.date)
+			talkToMe(forecast.text)
+			talkToMe("High: " + forecast.high)
+			talkToMe("Low: " + forecast.low)
+		return False
 
-        if 'grace' in recipient:
-            talkToMe('What should I say')
-            content = myCommand()
+	#sends email to Grace
+	if 'email' in command:
+		talkToMe('Who is the recipient')
+		recipient = myCommand()
 
-            #init gmail SMTP
-            mail = smtplib.SMTP('smtp.gmail.com', 587)
+		if 'grace' in recipient:
+			talkToMe('What should I say')
+			content = myCommand()
 
-            #identify to server
-            mail.ehlo()
+			#init gmail SMTP
+			mail = smtplib.SMTP('smtp.gmail.com', 587)
 
-            #encrypt session
-            mail.starttls()
+			#identify to server
+			mail.ehlo()
 
-            #login
-            mail.login('gstenger12', 'dorriseaton')
+			#encrypt session
+			mail.starttls()
 
-            #send message
-            mail.sendmail('Bro', 'gstenger19@deerfield.edu', 'Hello!')
+			#login
+			mail.login('gstenger12', 'dorriseaton')
 
-            #close connection
-            mail.close()
+			#send message
+			mail.sendmail('Bro', 'gstenger19@deerfield.edu', 'Hello!')
 
-            talkToMe('Email sent')
+			#close connection
+			mail.close()
 
-        #opens Spotify
-        if 'Play my music' in command:
-            talkToMe('Opening spotify')
+			talkToMe('Email sent')
 
-            # (720, 794)
-            os.system("open -a Spotify")
+		return False
 
-            print(pyautogui.position())
+	#opens Spotify
+	if 'play my music' in command:
+		talkToMe('Opening spotify')
 
-            time.sleep(5)
+		# (720, 794)
+		os.system("open -a Spotify")
 
-            pyautogui.click(720, 794)
+		print(pyautogui.position())
 
-        # connects to AirPlay
-        if 'Connect to airplay' in command:
-            talkToMe('opening airplay')
+		time.sleep(5)
 
-            from subprocess import Popen, PIPE
+		pyautogui.click(720, 794)
 
-            script = '''
-                tell application "System Events"
-            	tell process "SystemUIServer"
-            		click (menu bar item 1 of menu bar 1 whose description contains "Displays")
-            		click menu item 4 of menu 1 of result
-            	end tell
-            end tell'''
-            args = ['2', '2']
+		return False
 
-            p = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-            stdout, stderr = p.communicate(script)
-            print(p.returncode, stdout, stderr)
+	# connects to AirPlay
+	if 'Connect to airplay' in command:
+		talkToMe('opening airplay')
+
+		from subprocess import Popen, PIPE
+
+		script = '''
+			tell application "System Events"
+			tell process "SystemUIServer"
+				click (menu bar item 1 of menu bar 1 whose description contains "Displays")
+				click menu item 4 of menu 1 of result
+			end tell
+		end tell'''
+		args = ['2', '2']
+
+		p = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
+		stdout, stderr = p.communicate(script)
+		print(p.returncode, stdout, stderr)
+		return False
+
+	if 'goodbye' in command:
+		print('Good bye!')
+		return True
 
 
+if __name__ == "__main__":
 
+	talkToMe('I am ready for your command')
 
-talkToMe('I am ready for your command')
+	quit = False
 
-while True:
-    assistant(myCommand())
+	while not quit:
+		quit = assistant(myCommand())

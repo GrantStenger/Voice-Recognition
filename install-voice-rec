@@ -1,4 +1,14 @@
 #!/bin/bash
 # This script should hopefully install all required libraries
 
-echo "Hello World!"
+echo "Time to install everything. This may take a few minutes."
+pip install --upgrade pip
+brew install python3
+brew upgrade python
+pip3 install --upgrade speechrecognition
+pip3 install pyobjc-core
+pip3 install pyobjc
+pip install pyautogui
+pip install weather-api
+brew install portaudio
+pip install pyaudio

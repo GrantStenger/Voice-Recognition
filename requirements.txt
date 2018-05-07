@@ -1,3 +1,0 @@
-gTTS==2.0.0
-pyautogui==0.9.36
-weather==0.9.1
