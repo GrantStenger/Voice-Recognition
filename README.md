@@ -9,7 +9,7 @@
 4. In terminal navigate to the folder.
     1. Type "cd Documents/".
     2. Type "cd VoiceRec-master".
-5. Downloaded all requirements by typing "pip install -r requirements.txt" in terminal.
+5. Install all requirements by typing "./install-voice-rec" in terminal.
 6. Run the program by typing "python VoiceRec.py".
 
 ## How to Use My Program
