@@ -1,0 +1,4 @@
+#!/bin/bash
+# This script should hopefully install all required libraries
+
+echo "Hello World!"
