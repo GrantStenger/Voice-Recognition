@@ -1,5 +1,6 @@
 #!/bin/bash
-# This script should hopefully install all required libraries
+# This script should hopefully install all required libraries to run VoiceRec.py
+# This installation will only work on a Mac
 
 echo "Time to install everything. This may take a few minutes."
 pip install --upgrade pip
