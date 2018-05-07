@@ -1,6 +1,6 @@
 # Voice Command
-**Name**: Grace Stenger\n
-**Date**: May 6, 2018
+<p>**Name**: Grace Stenger</p>
+<p>**Date**: May 6, 2018</p>
 
 ## Installation and Set-Up
 1. Click the green button on the top right that says "Download ZIP".
@@ -14,12 +14,11 @@
 
 ## How to Use My Program
 1. Wait for the voice to prompt your command. Make sure your volume is on.
+2. Possible commands include:
+	1. What's up?
+	2. Open Google.
+	3. What is the weather?
+	4. Play my music.
+	5. Connect to Airplay.
+	6. Good bye!
 2. Enjoy!
-
-You also might need to run:
-pip install --upgrade pip
-brew install python3
-pip3 install --upgrade speechrecognition
-pip3 install pyobjc-core
-pip3 install pyobjc
-
