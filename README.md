@@ -1,6 +1,6 @@
 # Voice Command
-- **Name**: Grace Stenger
-- **Date**: May 6, 2018
+**Name**: Grace Stenger\n
+**Date**: May 6, 2018
 
 ## Installation and Set-Up
 1. Click the green button on the top right that says "Download ZIP".
