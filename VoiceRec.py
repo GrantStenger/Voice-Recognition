@@ -8,22 +8,15 @@ import os
 import time
 from weather import Weather, Unit
 
-
+# speaks audio passed as argument
 def talkToMe(audio):
-	"speaks audio passed as argument"
-
+	
 	print(audio)
 	for line in audio.splitlines():
 		os.system("say " + audio)
 
-   # tts = gTTS(text=audio, lang='en')
-   # tts.save('audio.mp3')
-   # #download mp3
-   # os.system(mpg123 audio.mp3)
-
+# listens for commands
 def myCommand():
-	"listens for commands"
-
 	r = sr.Recognizer()
 
 	with sr.Microphone() as source:
@@ -48,8 +41,6 @@ def myCommand():
 
 #if statements for executing commands
 def assistant(command):
-
-	"""if statements for executing commands"""
 
 	# chat
 	if 'what\'s up' in command:
